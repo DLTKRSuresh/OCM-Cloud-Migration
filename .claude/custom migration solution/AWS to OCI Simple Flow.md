@@ -186,5 +186,4 @@
       Failed --> Planned
       Completed --> [*]
 
-  This architecture provides a clear, straightforward flow from AWS discovery through to OCI deployment, using standard AWS public APIs and following
-  Oracle's recommended migration patterns without unnecessary complexity.
+
