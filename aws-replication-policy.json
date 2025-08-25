@@ -1,0 +1,19 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "ebs:ListChangedBlocks",
+                "ebs:ListSnapshotBlocks",
+                "ebs:GetSnapshotBlock",
+                "ec2:CreateSnapshots",
+                "ec2:CreateTags",
+                "ec2:DescribeInstances",
+                "ec2:DescribeVolumes",
+                "ec2:DescribeSnapshots"
+            ],
+            "Resource": "*"
+        }
+    ]
+}
