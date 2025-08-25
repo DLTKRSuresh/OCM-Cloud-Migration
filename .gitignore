@@ -1,1 +1,11 @@
 .terraform/providers/registry.terraform.io/oracle/oci/7.15.0/windows_amd64/terraform-provider-oci_v7.15.0
+Scripts/audit_log_search/audit_log_search.py
+dnu/AWS-SETUP-GUIDE.md
+dnu/custom migration solution/Custom-AWS-to-OCI-Migration-Design.md
+dnu/custom migration solution/Migration Solution Simplfied.md
+dnu/DEPLOYMENT-GUIDE.md
+dnu/Migration-Runbook.md
+dnu/oci-repo-analysis/oci-repo-analysis.md
+dnu/pre-requsites-notes-from-claude.md
+dnu/PROJECT-SUMMARY.md
+dnu/AWS-to-OCI-Migration-Design.md
