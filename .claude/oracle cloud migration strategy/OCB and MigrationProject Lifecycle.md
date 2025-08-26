@@ -81,3 +81,54 @@ Discovery Phase → (AWS APIs → Inventory DB → Resource Selection UI → Mig
 Migration Phase → (Snapshots → Transfer → OCI provisioning → Cutover).
 
 That’s exactly how OCI Cloud Bridge orchestrates it.
+
+
+
+==============================================================================================================================================
+Discovery Phase Inventory Details 
+  Oracle Cloud Bridge Asset Storage
+
+  When using Oracle Cloud Bridge (not the console), discovered assets are stored in:
+
+  Oracle's Internal Inventory Database
+
+  - Location: Oracle's managed database service (not in your tenancy)
+  - Access: Via Oracle Cloud Bridge APIs and Cloud Migration APIs
+  - Format: Structured inventory data accessible through REST endpoints
+
+  Your OCI Tenancy Storage
+
+  - Object Storage Bucket: Stores discovery snapshots and metadata
+  - Location: ocm-replication-bucket (created by prerequisites)
+  - Purpose: Staging area for migration data and backup inventory
+
+  What Our Prerequisites Actually Create
+
+  Looking at our current main.tf, we do NOT create any databases. The prerequisites only create:
+
+  # Storage (not database)
+  resource "oci_objectstorage_bucket" "replication_bucket"
+
+  # Security
+  resource "oci_kms_vault" "ocm_secrets"
+  resource "oci_kms_key" "ocm_key"
+
+  # IAM (Identity and Access Management)
+  resource "oci_identity_dynamic_group" "migration_dynamic_group"
+  resource "oci_identity_policy" "migration_compartment_policy"
+
+  Asset Discovery Flow
+
+  1. Discovery: Oracle Cloud Bridge discovers AWS assets → Stored in Oracle's managed inventory
+  2. API Access: Our app calls Oracle APIs → Gets discovered assets from Oracle's inventory
+  3. Local Cache: Our app can cache/display this data → But it's sourced from Oracle's APIs
+  4. Migration: Oracle uses its inventory → Creates resources in your OCI tenancy
+
+  No Database in Prerequisites
+
+  The prerequisites are purely for:
+  - Identity/Access: Permissions for Oracle services to work
+  - Security: KMS for credential encryption
+  - Storage: Object storage for migration data staging
+
+  The actual asset inventory lives in Oracle's managed service, accessible via their APIs.
